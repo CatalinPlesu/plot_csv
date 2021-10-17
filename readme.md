@@ -17,16 +17,24 @@ a ./png folder.
 
 optional arguments:
 ```
-  -h, --help   show this help message and exit
-  -v           verbose
-  -d           debug; output csv file content if something went wrong
-  --transpose  transpose csv file, wont plot anything will create a new folder with transposed csv
-               content
-  -1 FILENAME  plot only one file
-  -i DIR       input directory, default ./csv
-  -o DIR       output directory, default ./png
-  -x 'str'     x label
-  -y 'str'     y label
-  -t 'str'     title
+  -h, --help            show this help message and exit
+  -v                    verbose
+  -d                    debug; output csv file content if something went wrong
+  --transpose           transpose csv file, wont plot anything will create a new folder with
+                        transposed csv content
+  -1 FILENAME           plot only one file
+  -i DIR                input directory, default ./csv
+  -o DIR                output directory, default ./png
+  -x 'str'              x label
+  -y 'str'              y label
+  -t 'str'              title
+  --main MAIN           select which of the rows or columns should be used as x axis, 0 will be the
+                        first index
+  --ignore IGNORE [IGNORE ...]
+                        select which of the rows or columns shouldn't be used, 0 will be the first
+                        index
+  --plot PLOT [PLOT ...]
+                        choose what columns or rows to use for plotting y axis, 0 will be the first
+                        index
 ```
-
+- need to add '--ignore -1' to ignore last element

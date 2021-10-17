@@ -47,18 +47,20 @@ def print_csv_matrix(matrix):
         print(*r)
 
 def plot_to_png(file, filename):
-    x = file[0][1:len(file[0])]
+    x = file[args.main][1:len(file[args.main])]
     l_y = []
     yn = []
     y_max = 0
     y_min = 0
-    for i, line in enumerate(file[1:len(file)]):
-        l_y.append(file[i + 1][0])
-        yn.append(file[i + 1][1:len(file[0])])
-        if y_max < max(yn[i]):
-            y_max = max(yn[i])
-        if y_min < min(yn[i]):
-            y_min = min(yn[i])
+    for i, line in enumerate(file):
+        if i != args.main and i not in args.ignore:
+            if args.plot == [] or i in args.plot:
+                l_y.append(file[i][0])
+                yn.append(file[i][1:len(file[i])])
+                if y_max < max(yn[len(yn)-1]):
+                    y_max = max(yn[len(yn)-1])
+                if y_min < min(yn[len(yn)-1]):
+                    y_min = min(yn[len(yn)-1])
 
     y_max = math.ceil(y_max)
     y_min = math.floor(y_min)
@@ -172,6 +174,18 @@ parser.add_argument("-y", dest="y_label", default='oy',
 
 parser.add_argument("-t", dest="title", default='Title',
         help="title", metavar="'str'")
+
+parser.add_argument("--main", type=int, default=0,
+        help="""select which of the rows or columns should be used as x axis, 0
+        will be the first index""")
+
+parser.add_argument("--ignore", type=int, nargs="+", default=[],
+        help="""select which of the rows or columns shouldn't be used, 0
+        will be the first index""")
+
+parser.add_argument("--plot", dest="plot", nargs="+", type=int, default=[],
+        help="""choose what columns or rows to use for plotting y axis, 0
+        will be the first index""")
 
 if __name__ == "__main__":
     args = parser.parse_args()
