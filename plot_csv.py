@@ -55,6 +55,8 @@ def plot_to_png(file, filename):
     for i, line in enumerate(file):
         if i != args.main and i not in args.ignore:
             if args.plot == [] or i in args.plot:
+                if -1 in args.ignore and i == len(file) - 1:
+                    break
                 l_y.append(file[i][0])
                 yn.append(file[i][1:len(file[i])])
                 if y_max < max(yn[len(yn)-1]):
@@ -157,7 +159,7 @@ parser.add_argument('--transpose', action='store_true',
         help="""transpose csv file, wont plot anything will create a new 
         folder with transposed csv content""", dest='transpose')
 
-parser.add_argument('-1', help='plot only one file',
+parser.add_argument('-f', help='plot only one file',
         dest='filename', default=None)
 
 parser.add_argument("-i", dest="input_dir", default='csv',
@@ -181,7 +183,7 @@ parser.add_argument("--main", type=int, default=0,
 
 parser.add_argument("--ignore", type=int, nargs="+", default=[],
         help="""select which of the rows or columns shouldn't be used, 0
-        will be the first index""")
+        will be the first index, -1 will ignore the last element""")
 
 parser.add_argument("--plot", dest="plot", nargs="+", type=int, default=[],
         help="""choose what columns or rows to use for plotting y axis, 0
