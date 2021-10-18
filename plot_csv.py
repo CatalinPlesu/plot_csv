@@ -69,7 +69,7 @@ def plot_to_png(file, filename):
     y_min = math.floor(y_min)
 
     # output size
-    plt.figure(figsize=(16, 9))
+    plt.figure(figsize=(args.width, args.height))
 
     # OX, OY axes
     plt.axhline(0, color='#696969')
@@ -80,8 +80,6 @@ def plot_to_png(file, filename):
 
     plt.grid()
     # plt.xticks(np.arange(min(x), max(x)+1, 1.0))
-    if len(file) == 2:
-        args.y_label = file[1][0]
     plt.xlabel(file[0][0] if args.x_label == 'ox' else args.x_label)
     plt.ylabel(args.y_label)
     plt.title(args.title)
@@ -192,6 +190,12 @@ parser.add_argument("--ignore", type=int, nargs="+", default=[],
 parser.add_argument("--plot", dest="plot", nargs="+", type=int, default=[],
         help="""choose what columns or rows to use for plotting y axis, 0
         will be the first index""")
+
+parser.add_argument("--height", type=int, default=9, dest='height',
+        help="""for aspect ratio default 9""")
+
+parser.add_argument("--width", type=int, default=16, dest='width',
+        help="""for aspect ratio default 16""")
 
 if __name__ == "__main__":
     args = parser.parse_args()
