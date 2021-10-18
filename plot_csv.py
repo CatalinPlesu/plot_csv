@@ -1,7 +1,7 @@
 #!/bin/python
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FormatStrFormatter
-import numpy as np
+# from matplotlib.ticker import FormatStrFormatter
+# import numpy as np
 import csv
 import os
 import math
@@ -78,7 +78,9 @@ def plot_to_png(file, filename):
         plt.plot(x, y, color = color[i], linestyle = 'solid', marker = 'o',label = l_y[i])
 
     plt.grid()
-    plt.xticks(np.arange(min(x), max(x)+1, 1.0))
+    # plt.xticks(np.arange(min(x), max(x)+1, 1.0))
+    if len(file) == 2:
+        args.y_label = file[1][0]
     plt.xlabel(file[0][0] if args.x_label == 'ox' else args.x_label)
     plt.ylabel(args.y_label)
     plt.title(args.title)
@@ -119,7 +121,7 @@ def plotting_stuff():
             print_csv_matrix(file)
     
         try:
-            float(file[0][len(file)-1])
+            float(file[0][len(file[0])-1])
         except:
             file = transpose_csv_matrix(file)
             if args.debug:
@@ -128,6 +130,7 @@ def plotting_stuff():
             print("File had to be transposed")
 
         if args.transpose:
+            file = transpose_csv_matrix(file)
             export_csv_file(file, args.output_dir + '/' + filename[0:len(filename)-4])
             continue
 
