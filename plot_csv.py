@@ -58,6 +58,7 @@ def plot_to_png(file, filename):
                 if -1 in args.ignore and i == len(file) - 1:
                     break
                 l_y.append(file[i][0])
+                #yn are all lines tha will be ploted on oy
                 yn.append(file[i][1:len(file[i])])
                 if y_max < max(yn[len(yn)-1]):
                     y_max = max(yn[len(yn)-1])
