@@ -1,7 +1,5 @@
 #!/bin/python
 import matplotlib.pyplot as plt
-# from matplotlib.ticker import FormatStrFormatter
-# import numpy as np
 import csv
 import os
 import math
@@ -79,7 +77,6 @@ def plot_to_png(file, filename):
         plt.plot(x, y, color = color[i], linestyle = 'solid', marker = 'o',label = l_y[i])
 
     plt.grid()
-    # plt.xticks(np.arange(min(x), max(x)+1, 1.0))
     plt.xlabel(file[0][0] if args.x_label == 'ox' else args.x_label)
     plt.ylabel(args.y_label)
     plt.title(args.title)
@@ -191,11 +188,11 @@ parser.add_argument("--plot", dest="plot", nargs="+", type=int, default=[],
         help="""choose what columns or rows to use for plotting y axis, 0
         will be the first index""")
 
-parser.add_argument("--height", type=int, default=9, dest='height',
-        help="""for aspect ratio default 9""")
+parser.add_argument("--height", type=int, default=6, dest='height',
+        help="""for aspect ratio default 6""")
 
-parser.add_argument("--width", type=int, default=16, dest='width',
-        help="""for aspect ratio default 16""")
+parser.add_argument("--width", type=int, default=6, dest='width',
+        help="""for aspect ratio default 6""")
 
 if __name__ == "__main__":
     args = parser.parse_args()
